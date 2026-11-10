@@ -1,1 +1,894 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE ARCHIVE — Creepypastas & Internet Horror Lore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark: #121212;
+  --panel-bg: #181818;
+  --panel-border: #282828;
+  --text-main: #e0e0e0;
+  --text-muted: #888888;
+  --accent-red: #d32f2f;
+  --accent-red-hover: #b71c1c;
+  --accent-orange: #f57c00;
+  --input-bg: #222222;
+  --input-border: #333333;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+a{color:var(--text-main);text-decoration:none}
+a:hover{color:var(--accent-red)}
 
+.topbar{height:4px;background:linear-gradient(90deg, var(--accent-red), var(--accent-orange))}
+.wrap{max-width:1150px;margin:auto;padding:0 20px}
+
+/* HEADER */
+header{
+  background: #0d0d0d;
+  border-bottom: 1px solid var(--panel-border);
+  padding: 20px 0 0;
+}
+.header-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.brand-group{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.brand-logo-svg{
+  width: 42px;
+  height: 42px;
+  fill: var(--accent-red);
+}
+.brand-title{
+  font-family: 'Creepster', cursive;
+  font-size: 38px;
+  color: var(--accent-red);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.brand-sub{
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.search-box{
+  display: flex;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.search-box input{
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  width: 200px;
+}
+.search-box button{
+  background: var(--input-border);
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.search-box button:hover{background:var(--accent-red);color:#fff}
+
+/* NAV */
+nav{
+  display: flex;
+  gap: 20px;
+  border-top: 1px solid var(--panel-border);
+  padding: 12px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+nav a{color: var(--text-muted); transition: color 0.2s;}
+nav a:hover{color: var(--text-main)}
+nav a.nav-highlight{color: var(--accent-red)}
+
+/* MAIN LAYOUT */
+main{padding: 30px 0 60px}
+.crumb{font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px}
+
+h1,h2,h3{font-family: 'Montserrat', sans-serif; font-weight: 700;}
+h1{font-size: 28px; margin: 0 0 10px; color: #fff;}
+
+/* BUTTONS */
+.btn{
+  display: inline-block;
+  background: #252525;
+  color: #fff;
+  border: 1px solid #3a3a3a;
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.btn:hover{background: #333; color: #fff; text-decoration: none;}
+.btn-red{background: var(--accent-red); border-color: var(--accent-red); color: #fff;}
+.btn-red:hover{background: var(--accent-red-hover); border-color: var(--accent-red-hover);}
+.btn-sm{padding: 6px 12px; font-size: 11px;}
+
+/* CARDS & PANELS */
+.panel{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.story-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.story-card{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s;
+}
+.story-card:hover{border-color: #444}
+.tag{
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  letter-spacing: 1px;
+}
+.story-card h3{
+  margin: 8px 0;
+  font-size: 18px;
+}
+.story-card h3 a{color: #fff}
+.story-card h3 a:hover{color: var(--accent-red)}
+.story-meta{font-size: 11px; color: var(--text-muted); margin-bottom: 12px;}
+.story-desc{font-size: 13px; color: #b0b0b0; margin-bottom: 15px; line-height: 1.5;}
+
+.story-image-wrap{
+  width: 100%;
+  max-height: 280px;
+  background: #0a0a0a;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.story-image-wrap img{
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+/* READER VIEW */
+.reader-container{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 30px;
+}
+.reader-body{
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 16px;
+  line-height: 2;
+  color: #d8d8d8;
+  margin-top: 25px;
+}
+.reader-body p{margin-bottom: 22px;}
+.reader-toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
+  padding: 12px 0;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* FORMS */
+label{
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 14px 0 6px;
+  color: var(--accent-orange);
+}
+input, select, textarea{
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+input:focus, textarea:focus, select:focus{border-color: var(--accent-orange);}
+textarea{min-height: 140px; resize: vertical;}
+input[type="file"]{padding: 8px; cursor: pointer;}
+
+/* ADMIN TABS */
+.admin-tabs{
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+.tab-btn{
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tab-btn.active{background: var(--input-border); color: #fff;}
+.badge{
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+/* BLOOD OVERLAY */
+#blood-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+}
+#blood-overlay.active {
+  animation: bloodSplash 2s forwards;
+}
+
+@keyframes bloodSplash {
+  0% { opacity: 0; transform: scale(0.9); }
+  15% { opacity: 1; transform: scale(1); }
+  80% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+
+footer{
+  border-top: 1px solid var(--panel-border);
+  padding: 25px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.empty-state{
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BLOOD SPLATTER OVERLAY -->
+<svg id="blood-overlay" viewBox="0 0 800 600" preserveAspectRatio="none">
+  <path fill="#d32f2f" d="M -10,-10 L 250,-10 Q 190,100 150,120 Q 110,140 180,200 Q 100,150 80,240 Q 60,140 -10,130 Z"/>
+  <circle cx="210" cy="230" r="14" fill="#d32f2f"/>
+  <circle cx="250" cy="160" r="8" fill="#d32f2f"/>
+  <circle cx="130" cy="270" r="16" fill="#d32f2f"/>
+  <path fill="#9a0007" d="M 400,270 Q 440,200 460,240 Q 500,200 510,270 Q 570,280 510,320 Q 550,370 470,350 Q 450,430 420,360 Q 340,390 380,320 Q 310,280 370,260 Z"/>
+  <circle cx="530" cy="210" r="10" fill="#9a0007"/>
+  <circle cx="330" cy="370" r="12" fill="#9a0007"/>
+  <path fill="#d32f2f" d="M 810,610 L 600,610 Q 650,500 690,470 Q 750,510 730,390 Q 780,470 810,440 Z"/>
+  <circle cx="620" cy="450" r="15" fill="#d32f2f"/>
+</svg>
+
+<div class="topbar"></div>
+
+<header>
+  <div class="wrap">
+    <div class="header-flex">
+      <div class="brand-group" onclick="showHome(); return false;">
+        <!-- DETAILED HORROR SKULL ICON -->
+        <svg class="brand-logo-svg" viewBox="0 0 512 512">
+          <path d="M256 32C167.6 32 96 103.6 96 192c0 43.1 16.5 82.3 43.6 111.8L128 384l64-32 32 64 32-64 32 64 32-64 64 32-11.6-80.2C399.5 274.3 416 235.1 416 192c0-88.4-71.6-160-160-160zm-64 192c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm-64 96c-35.3 0-64-28.7-64-64h128c0 35.3-28.7 64-64 64z"/>
+        </svg>
+        <div>
+          <div class="brand-title">THE ARCHIVE</div>
+          <div class="brand-sub">Creepypastas & Internet Horror Lore</div>
+        </div>
+      </div>
+      <div class="search-box">
+        <input id="search-input" placeholder="Search archive...">
+        <button onclick="handleSearch()">GO</button>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#" onclick="showHome(); return false;">Home</a>
+      <a href="#" onclick="showCategory('Psychological'); return false;">Psychological</a>
+      <a href="#" onclick="showCategory('Paranormal'); return false;">Paranormal</a>
+      <a href="#" onclick="showCategory('Entities & Monsters'); return false;">Entities & Monsters</a>
+      <a href="#" onclick="showCategory('Urban Legends'); return false;">Urban Legends</a>
+      <a href="#" onclick="showLore(); return false;">Character Lore</a>
+      <a href="#" class="nav-highlight" onclick="showSubmit(); return false;">+ Submit Story</a>
+      <a href="#" id="admin-nav-link" onclick="showLogin(); return false;">Editor Portal</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumb" id="crumb-nav">HOME / THE ARCHIVE</div>
+  <div id="main-view"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; <span id="year"></span> THE ARCHIVE. All fictional stories and internet lore are hosted for entertainment.
+  </div>
+</footer>
+
+<script>
+const ADMIN_EMAIL = "lukesteynstudios@gmail.com";
+const ADMIN_PASS = "Luke@zuma007";
+
+let currentUser = localStorage.getItem('archive_admin_user') || null;
+let stories = JSON.parse(localStorage.getItem('archive_stories_db') || '[]');
+let loreEntries = JSON.parse(localStorage.getItem('archive_lore_db') || '[]');
+let submissions = JSON.parse(localStorage.getItem('archive_submissions_db') || '[]');
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateStr = d => d ? new Date(d).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : "Draft";
+
+function saveData(){
+  localStorage.setItem('archive_stories_db', JSON.stringify(stories));
+  localStorage.setItem('archive_lore_db', JSON.stringify(loreEntries));
+  localStorage.setItem('archive_submissions_db', JSON.stringify(submissions));
+}
+
+function fileToBase64(file){
+  return new Promise((resolve) => {
+    if(!file) return resolve('');
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+function triggerBlood(){
+  const overlay = $('blood-overlay');
+  overlay.classList.remove('active');
+  void overlay.offsetWidth;
+  overlay.classList.add('active');
+  setTimeout(() => overlay.classList.remove('active'), 2000);
+}
+
+function updateNavAdmin(){
+  const link = $('admin-nav-link');
+  if(currentUser) {
+    link.textContent = "Admin Control Panel";
+    link.onclick = (e) => { e.preventDefault(); showAdmin(); return false; };
+  } else {
+    link.textContent = "Editor Portal";
+    link.onclick = (e) => { e.preventDefault(); showLogin(); return false; };
+  }
+}
+
+function renderCard(s){
+  let img = s.image ? `<div class="story-image-wrap"><img src="${s.image}" alt="Story illustration"></div>` : '';
+  return `
+    <div class="story-card">
+      <div>
+        <span class="tag">${esc(s.category||'Creepypasta')}</span>
+        <h3><a href="#" onclick="openStory('${s.id}'); return false;">${esc(s.title)}</a></h3>
+        <div class="story-meta">By ${esc(s.author||'Anonymous')} &bull; ${dateStr(s.published_at)}</div>
+        ${img}
+        <div class="story-desc">${esc(s.summary || s.body.substring(0, 120) + '...')}</div>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-red" onclick="openStory('${s.id}'); return false;">READ STORY &rarr;</button>
+      </div>
+    </div>
+  `;
+}
+
+function showHome(){
+  updateNavAdmin();
+  $('crumb-nav').textContent = 'HOME / THE ARCHIVE';
+  const pub = stories.filter(s => s.status === 'published');
+  
+  let html = `
+    <h1>Archive Collection</h1>
+    <p style="color:var(--text-muted); font-size:14px; margin-bottom: 25px;">
+      Explore archived accounts, creepypastas, and unexplained entries.
+    </p>
+  `;
+
+  if(!pub.length){
+    html += `<div class="panel empty-state"><h3>No Stories Published Yet</h3><p>The archive is currently empty. Use the Editor Portal or submit a story to begin.</p></div>`;
+  } else {
+    html += `<div class="story-grid">${pub.map(renderCard).join('')}</div>`;
+  }
+  
+  $('main-view').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function showCategory(cat){
+  $('crumb-nav').textContent = `CATEGORIES / ${cat.toUpperCase()}`;
+  const filtered = stories.filter(s => s.status === 'published' && s.category === cat);
+  
+  let html = `<h1>${esc(cat)} Stories</h1>`;
+  if(!filtered.length){
+    html += `<div class="panel empty-state"><h3>No entries in this category</h3></div>`;
+  } else {
+    html += `<div class="story-grid">${filtered.map(renderCard).join('')}</div>`;
+  }
+  $('main-view').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function openStory(id){
+  const s = stories.find(x => x.id === id);
+  if(!s) return;
+
+  $('crumb-nav').textContent = `READ / ${s.title.toUpperCase()}`;
+  let img = s.image ? `<div class="story-image-wrap" style="max-height:400px; margin:20px 0;"><img src="${s.image}" style="max-height:400px;" alt="Illustration"></div>` : '';
+  const bodyHtml = esc(s.body).split(/\n+/).map(p => `<p>${p}</p>`).join('');
+
+  $('main-view').innerHTML = `
+    <div class="reader-container">
+      <span class="tag">${esc(s.category)}</span>
+      <h1 style="font-size:32px; margin-top:10px;">${esc(s.title)}</h1>
+      <div style="color:var(--text-muted); font-size:12px;">By ${esc(s.author||'Anonymous')} &bull; Published ${dateStr(s.published_at)}</div>
+      ${img}
+      <div class="reader-toolbar">
+        <span>Reading Time: ~${Math.max(1, Math.ceil(s.body.length/900))} min</span>
+        <div>
+          <button class="btn btn-sm" onclick="adjustTextSize(-1)">A-</button>
+          <button class="btn btn-sm" onclick="adjustTextSize(1)">A+</button>
+        </div>
+      </div>
+      <div class="reader-body" id="reader-text">${bodyHtml}</div>
+      <div style="margin-top: 30px;">
+        <button class="btn" onclick="showHome(); return false;">&larr; Return to Archive</button>
+      </div>
+    </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function adjustTextSize(delta){
+  const el = $('reader-text');
+  if(!el) return;
+  const current = parseFloat(window.getComputedStyle(el).fontSize);
+  el.style.fontSize = Math.max(12, Math.min(26, current + delta)) + 'px';
+}
+
+function showLore(){
+  $('crumb-nav').textContent = 'LORE / CHARACTER PROFILES';
+  const pub = loreEntries.filter(l => l.status === 'published');
+  
+  let html = `<h1>Character & Entity Lore</h1>`;
+  if(!pub.length){
+    html += `<div class="panel empty-state"><h3>No lore entries available.</h3></div>`;
+  } else {
+    html += `<div class="story-grid">${pub.map(l => `
+      <div class="story-card">
+        <div>
+          <span class="tag">${esc(l.kind)}</span>
+          <h3>${esc(l.title)}</h3>
+          ${l.image ? `<div class="story-image-wrap"><img src="${l.image}"></div>` : ''}
+          <div class="story-desc">${esc(l.body)}</div>
+        </div>
+      </div>
+    `).join('')}</div>`;
+  }
+  $('main-view').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function showSubmit(){
+  $('crumb-nav').textContent = 'CONTRIBUTE / SUBMIT STORY';
+  $('main-view').innerHTML = `
+    <div class="panel" style="max-width:700px; margin:auto;">
+      <h1 style="color:var(--accent-red);">Submit Your Creepypasta</h1>
+      <p style="color:var(--text-muted); font-size:13px;">Submitted stories are queued for administrator review before appearing publicly.</p>
+      <form id="public-submit-form">
+        <label>Author Name / Alias</label>
+        <input name="author" required placeholder="e.g. Anonymoose">
+        
+        <label>Email Address</label>
+        <input name="email" type="email" required placeholder="you@example.com">
+        
+        <label>Story Title</label>
+        <input name="title" required placeholder="Title of your story">
+        
+        <label>Category</label>
+        <select name="category">
+          <option>Psychological</option>
+          <option>Paranormal</option>
+          <option>Entities & Monsters</option>
+          <option>Urban Legends</option>
+        </select>
+        
+        <label>Illustration / Photo (Optional)</label>
+        <input name="imageFile" type="file" accept="image/*">
+        
+        <label>Short Summary</label>
+        <textarea name="summary" style="min-height:70px;" placeholder="Brief teaser..."></textarea>
+        
+        <label>Full Story Text</label>
+        <textarea name="body" required placeholder="Type or paste your story here..."></textarea>
+        
+        <div style="margin-top: 20px;">
+          <button type="submit" class="btn btn-red">SEND FOR REVIEW</button>
+        </div>
+        <div id="submit-status" style="margin-top:15px; font-weight:700;"></div>
+      </form>
+    </div>
+  `;
+
+  $('public-submit-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    triggerBlood();
+    
+    const f = new FormData(e.target);
+    const imgBase64 = await fileToBase64(f.get('imageFile'));
+
+    const sub = {
+      id: 'sub_' + Date.now(),
+      author: f.get('author'),
+      email: f.get('email'),
+      title: f.get('title'),
+      category: f.get('category'),
+      summary: f.get('summary'),
+      body: f.get('body'),
+      image: imgBase64,
+      created_at: new Date().toISOString()
+    };
+
+    submissions.unshift(sub);
+    saveData();
+
+    $('submit-status').style.color = '#4caf50';
+    $('submit-status').textContent = 'Your story has been submitted for review.';
+    e.target.reset();
+  });
+  window.scrollTo(0, 0);
+}
+
+function showLogin(){
+  $('crumb-nav').textContent = 'PORTAL / EDITOR ACCESS';
+  $('main-view').innerHTML = `
+    <div class="panel" style="max-width:400px; margin:auto;">
+      <h2 style="color:var(--accent-orange); margin-top:0;">Administrator Portal</h2>
+      <form id="login-form">
+        <label>Email</label>
+        <input name="email" type="email" required>
+        <label>Password</label>
+        <input name="password" type="password" required>
+        <div style="margin-top: 20px;">
+          <button type="submit" class="btn btn-red" style="width:100%;">SIGN IN</button>
+        </div>
+        <div id="login-error" style="color:var(--accent-red); margin-top:12px; font-size:12px;"></div>
+      </form>
+    </div>
+  `;
+
+  $('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    if(f.get('email').trim().toLowerCase() === ADMIN_EMAIL && f.get('password') === ADMIN_PASS){
+      currentUser = ADMIN_EMAIL;
+      localStorage.setItem('archive_admin_user', currentUser);
+      updateNavAdmin();
+      showAdmin();
+    } else {
+      $('login-error').textContent = 'Invalid administrator credentials.';
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+function showAdmin(activeTab = 'stories'){
+  if(currentUser !== ADMIN_EMAIL) { showLogin(); return; }
+
+  $('crumb-nav').textContent = 'PORTAL / CONTROL PANEL';
+  $('main-view').innerHTML = `
+    <div class="panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div>
+          <span style="color:var(--accent-orange); font-size:11px; font-weight:700; text-transform:uppercase;">ADMINISTRATOR PORTAL</span>
+          <h1 style="font-family:'Creepster', cursive; font-size:32px; color:#fff; margin:0;">ARCHIVE EDITOR CONTROL PANEL</h1>
+        </div>
+        <button class="btn btn-sm" onclick="signOut(); return false;">Sign Out</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab-btn ${activeTab==='stories'?'active':''}" onclick="showAdmin('stories'); return false;">Stories (${stories.length})</button>
+        <button class="tab-btn ${activeTab==='lore'?'active':''}" onclick="showAdmin('lore'); return false;">Lore (${loreEntries.length})</button>
+        <button class="tab-btn ${activeTab==='subs'?'active':''}" onclick="showAdmin('subs'); return false;">Submissions <span class="badge">${submissions.length}</span></button>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        ${activeTab==='stories' ? `<button class="btn btn-red" onclick="editStoryForm(); return false;">+ ADD NEW CREEPYPASTA</button>` : ''}
+        ${activeTab==='lore' ? `<button class="btn btn-red" onclick="editLoreForm(); return false;">+ ADD CHARACTER LORE</button>` : ''}
+      </div>
+
+      <div id="admin-tab-content"></div>
+    </div>
+  `;
+
+  const container = $('admin-tab-content');
+
+  if(activeTab === 'stories'){
+    container.innerHTML = stories.length ? stories.map(s => `
+      <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px; flex-wrap:wrap; gap:10px;">
+        <div>
+          <strong>${esc(s.title)}</strong> <span class="tag">${esc(s.status)}</span>
+          <div style="font-size:11px; color:var(--text-muted);">${esc(s.category)} &bull; By ${esc(s.author)}</div>
+        </div>
+        <div>
+          <button class="btn btn-sm" onclick="editStoryForm('${s.id}'); return false;">Edit</button>
+          <button class="btn btn-sm btn-red" onclick="deleteStory('${s.id}'); return false;">Delete</button>
+        </div>
+      </div>
+    `).join('') : `<p class="empty-state">No stories created yet.</p>`;
+  } else if(activeTab === 'lore'){
+    container.innerHTML = loreEntries.length ? loreEntries.map(l => `
+      <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px;">
+        <div>
+          <strong>${esc(l.title)}</strong> <span class="tag">${esc(l.kind)}</span>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-red" onclick="deleteLore('${l.id}'); return false;">Delete</button>
+        </div>
+      </div>
+    `).join('') : `<p class="empty-state">No lore entries created yet.</p>`;
+  } else if(activeTab === 'subs'){
+    container.innerHTML = submissions.length ? submissions.map(sub => `
+      <div class="panel" style="background:#111; margin-bottom:15px;">
+        <span class="tag">${esc(sub.category)}</span>
+        <h3>${esc(sub.title)}</h3>
+        <p style="font-size:12px; color:var(--text-muted);">From: ${esc(sub.author)} (${esc(sub.email)})</p>
+        ${sub.image ? `<div class="story-image-wrap"><img src="${sub.image}"></div>` : ''}
+        <div style="font-size:13px; color:#ccc; margin:10px 0;">${esc(sub.body)}</div>
+        <button class="btn btn-sm btn-red" onclick="approveSub('${sub.id}'); return false;">APPROVE & PUBLISH</button>
+        <button class="btn btn-sm" onclick="deleteSub('${sub.id}'); return false;">REJECT</button>
+      </div>
+    `).join('') : `<p class="empty-state">No pending submissions.</p>`;
+  }
+  window.scrollTo(0, 0);
+}
+
+function editStoryForm(id = ''){
+  const s = stories.find(x => x.id === id) || {};
+  $('admin-tab-content').innerHTML = `
+    <h3>${id ? 'Edit Story' : 'New Creepypasta'}</h3>
+    <form id="story-editor-form">
+      <label>Title</label>
+      <input name="title" required value="${esc(s.title||'')}">
+      
+      <label>Author</label>
+      <input name="author" value="${esc(s.author||'Anonymous')}">
+      
+      <label>Category</label>
+      <select name="category">
+        <option ${s.category==='Psychological'?'selected':''}>Psychological</option>
+        <option ${s.category==='Paranormal'?'selected':''}>Paranormal</option>
+        <option ${s.category==='Entities & Monsters'?'selected':''}>Entities & Monsters</option>
+        <option ${s.category==='Urban Legends'?'selected':''}>Urban Legends</option>
+      </select>
+      
+      <label>Cover Photo (Upload)</label>
+      ${s.image ? `<div class="story-image-wrap"><img src="${s.image}"></div>` : ''}
+      <input name="imageFile" type="file" accept="image/*">
+      
+      <label>Short Summary</label>
+      <textarea name="summary" style="min-height:60px;">${esc(s.summary||'')}</textarea>
+      
+      <label>Full Story Text</label>
+      <textarea name="body" required style="min-height:200px;">${esc(s.body||'')}</textarea>
+      
+      <label>Status</label>
+      <select name="status">
+        <option value="published" ${s.status==='published'?'selected':''}>Published</option>
+        <option value="draft" ${s.status==='draft'?'selected':''}>Draft</option>
+      </select>
+      
+      <div style="margin-top:20px;">
+        <button type="submit" class="btn btn-red">SAVE STORY</button>
+        <button type="button" class="btn" onclick="showAdmin('stories'); return false;">CANCEL</button>
+      </div>
+    </form>
+  `;
+
+  $('story-editor-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const newImg = await fileToBase64(f.get('imageFile'));
+    
+    const row = {
+      id: id || ('story_' + Date.now()),
+      title: f.get('title'),
+      author: f.get('author'),
+      category: f.get('category'),
+      summary: f.get('summary'),
+      body: f.get('body'),
+      image: newImg || s.image || '',
+      status: f.get('status'),
+      published_at: f.get('status')==='published' ? (s.published_at || new Date().toISOString()) : null
+    };
+
+    if(id){
+      const idx = stories.findIndex(x => x.id === id);
+      stories[idx] = row;
+    } else {
+      stories.unshift(row);
+    }
+
+    saveData();
+    showAdmin('stories');
+  });
+}
+
+function editLoreForm(){
+  $('admin-tab-content').innerHTML = `
+    <h3>New Character Lore</h3>
+    <form id="lore-editor-form">
+      <label>Character / Entity Name</label>
+      <input name="title" required>
+      <label>Type</label>
+      <input name="kind" placeholder="e.g. Entity, Monster, Urban Legend">
+      <label>Image (Upload)</label>
+      <input name="imageFile" type="file" accept="image/*">
+      <label>Description / Lore</label>
+      <textarea name="body" required style="min-height:150px;"></textarea>
+      <div style="margin-top:20px;">
+        <button type="submit" class="btn btn-red">SAVE LORE</button>
+        <button type="button" class="btn" onclick="showAdmin('lore'); return false;">CANCEL</button>
+      </div>
+    </form>
+  `;
+
+  $('lore-editor-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const img = await fileToBase64(f.get('imageFile'));
+
+    loreEntries.unshift({
+      id: 'lore_' + Date.now(),
+      title: f.get('title'),
+      kind: f.get('kind') || 'Entity',
+      image: img,
+      body: f.get('body'),
+      status: 'published'
+    });
+
+    saveData();
+    showAdmin('lore');
+  });
+}
+
+function approveSub(id){
+  const sub = submissions.find(x => x.id === id);
+  if(!sub) return;
+
+  stories.unshift({
+    id: 'story_' + Date.now(),
+    title: sub.title,
+    author: sub.author,
+    category: sub.category,
+    summary: sub.summary,
+    body: sub.body,
+    image: sub.image || '',
+    status: 'published',
+    published_at: new Date().toISOString()
+  });
+
+  submissions = submissions.filter(x => x.id !== id);
+  saveData();
+  showAdmin('subs');
+}
+
+function deleteSub(id){
+  submissions = submissions.filter(x => x.id !== id);
+  saveData();
+  showAdmin('subs');
+}
+
+function deleteStory(id){
+  if(!confirm('Permanently delete this story?')) return;
+  stories = stories.filter(x => x.id !== id);
+  saveData();
+  showAdmin('stories');
+}
+
+function deleteLore(id){
+  if(!confirm('Permanently delete this lore entry?')) return;
+  loreEntries = loreEntries.filter(x => x.id !== id);
+  saveData();
+  showAdmin('lore');
+}
+
+function handleSearch(){
+  const q = $('search-input').value.trim().toLowerCase();
+  if(!q) return;
+  
+  $('crumb-nav').textContent = `SEARCH / "${q.toUpperCase()}"`;
+  const results = stories.filter(s => s.status==='published' && (s.title.toLowerCase().includes(q) || s.body.toLowerCase().includes(q)));
+
+  let html = `<h1>Search Results for "${esc(q)}"</h1>`;
+  if(!results.length){
+    html += `<div class="panel empty-state"><h3>No matching stories found.</h3></div>`;
+  } else {
+    html += `<div class="story-grid">${results.map(renderCard).join('')}</div>`;
+  }
+  $('main-view').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function signOut(){
+  currentUser = null;
+  localStorage.removeItem('archive_admin_user');
+  updateNavAdmin();
+  showHome();
+}
+
+$('year').textContent = new Date().getFullYear();
+showHome();
+</script>
+</body>
+</html>
