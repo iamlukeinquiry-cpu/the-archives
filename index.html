@@ -361,6 +361,7 @@ footer{
       <a href="#" onclick="showCategory('Entities & Monsters'); return false;">Entities & Monsters</a>
       <a href="#" onclick="showCategory('Urban Legends'); return false;">Urban Legends</a>
       <a href="#" onclick="showLore(); return false;">Character Lore</a>
+      <a href="#" onclick="showUpdates(); return false;">Update Log</a>
       <a href="#" class="nav-highlight" onclick="showSubmit(); return false;">+ Submit Story</a>
       <a href="#" id="admin-nav-link" onclick="showLogin(); return false;">Editor Portal</a>
     </nav>
@@ -386,6 +387,7 @@ let currentUser = localStorage.getItem('archive_admin_user') || null;
 let stories = JSON.parse(localStorage.getItem('archive_stories_db') || '[]');
 let loreEntries = JSON.parse(localStorage.getItem('archive_lore_db') || '[]');
 let submissions = JSON.parse(localStorage.getItem('archive_submissions_db') || '[]');
+let updateLogs = JSON.parse(localStorage.getItem('archive_updates_db') || '[]');
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -395,6 +397,7 @@ function saveData(){
   localStorage.setItem('archive_stories_db', JSON.stringify(stories));
   localStorage.setItem('archive_lore_db', JSON.stringify(loreEntries));
   localStorage.setItem('archive_submissions_db', JSON.stringify(submissions));
+  localStorage.setItem('archive_updates_db', JSON.stringify(updateLogs));
 }
 
 function fileToBase64(file){
@@ -539,6 +542,26 @@ function showLore(){
   window.scrollTo(0, 0);
 }
 
+function showUpdates(){
+  $('crumb-nav').textContent = 'ARCHIVE / UPDATE LOG';
+  let html = `<h1>Archive Update Log</h1><p style="color:var(--text-muted); font-size:14px; margin-bottom: 25px;">Track recent changes, new additions, and administrative announcements.</p>`;
+
+  if(!updateLogs.length){
+    html += `<div class="panel empty-state"><h3>No update logs posted yet.</h3></div>`;
+  } else {
+    html += `<div style="display:grid; gap:20px;">${updateLogs.map(u => `
+      <div class="panel" style="margin-bottom:0;">
+        <span class="tag">Version Update</span>
+        <h2 style="margin:8px 0 4px; font-size:20px; color:#fff;">${esc(u.title)}</h2>
+        <div style="font-size:11px; color:var(--text-muted); margin-bottom:15px;">Posted on ${dateStr(u.date)}</div>
+        <div style="font-size:14px; color:#ccc; line-height:1.7; white-space:pre-wrap;">${esc(u.body)}</div>
+      </div>
+    `).join('')}</div>`;
+  }
+  $('main-view').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
 function showSubmit(){
   $('crumb-nav').textContent = 'CONTRIBUTE / SUBMIT STORY';
   $('main-view').innerHTML = `
@@ -660,11 +683,13 @@ function showAdmin(activeTab = 'stories'){
         <button class="tab-btn ${activeTab==='stories'?'active':''}" onclick="showAdmin('stories'); return false;">Stories (${stories.length})</button>
         <button class="tab-btn ${activeTab==='lore'?'active':''}" onclick="showAdmin('lore'); return false;">Lore (${loreEntries.length})</button>
         <button class="tab-btn ${activeTab==='subs'?'active':''}" onclick="showAdmin('subs'); return false;">Submissions <span class="badge">${submissions.length}</span></button>
+        <button class="tab-btn ${activeTab==='updates'?'active':''}" onclick="showAdmin('updates'); return false;">Update Logs (${updateLogs.length})</button>
       </div>
 
       <div style="margin-bottom:20px;">
         ${activeTab==='stories' ? `<button class="btn btn-red" onclick="editStoryForm(); return false;">+ ADD NEW CREEPYPASTA</button>` : ''}
         ${activeTab==='lore' ? `<button class="btn btn-red" onclick="editLoreForm(); return false;">+ ADD CHARACTER LORE</button>` : ''}
+        ${activeTab==='updates' ? `<button class="btn btn-red" onclick="editUpdateForm(); return false;">+ POST NEW UPDATE LOG</button>` : ''}
       </div>
 
       <div id="admin-tab-content"></div>
@@ -709,6 +734,19 @@ function showAdmin(activeTab = 'stories'){
         <button class="btn btn-sm" onclick="deleteSub('${sub.id}'); return false;">REJECT</button>
       </div>
     `).join('') : `<p class="empty-state">No pending submissions.</p>`;
+  } else if(activeTab === 'updates'){
+    container.innerHTML = updateLogs.length ? updateLogs.map(u => `
+      <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px; flex-wrap:wrap; gap:10px;">
+        <div>
+          <strong>${esc(u.title)}</strong>
+          <div style="font-size:11px; color:var(--text-muted);">Posted: ${dateStr(u.date)}</div>
+        </div>
+        <div>
+          <button class="btn btn-sm" onclick="editUpdateForm('${u.id}'); return false;">Edit</button>
+          <button class="btn btn-sm btn-red" onclick="deleteUpdate('${u.id}'); return false;">Delete</button>
+        </div>
+      </div>
+    `).join('') : `<p class="empty-state">No update logs posted yet.</p>`;
   }
   window.scrollTo(0, 0);
 }
@@ -822,6 +860,47 @@ function editLoreForm(){
   });
 }
 
+function editUpdateForm(id = ''){
+  const u = updateLogs.find(x => x.id === id) || {};
+  $('admin-tab-content').innerHTML = `
+    <h3>${id ? 'Edit Update Log' : 'Post New Update Log'}</h3>
+    <form id="update-editor-form">
+      <label>Update Title / Version Name</label>
+      <input name="title" required value="${esc(u.title||'')}">
+      
+      <label>Update Details / Notes</label>
+      <textarea name="body" required style="min-height:150px;">${esc(u.body||'')}</textarea>
+      
+      <div style="margin-top:20px;">
+        <button type="submit" class="btn btn-red">SAVE UPDATE LOG</button>
+        <button type="button" class="btn" onclick="showAdmin('updates'); return false;">CANCEL</button>
+      </div>
+    </form>
+  `;
+
+  $('update-editor-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    
+    const row = {
+      id: id || ('update_' + Date.now()),
+      title: f.get('title'),
+      body: f.get('body'),
+      date: u.date || new Date().toISOString()
+    };
+
+    if(id){
+      const idx = updateLogs.findIndex(x => x.id === id);
+      updateLogs[idx] = row;
+    } else {
+      updateLogs.unshift(row);
+    }
+
+    saveData();
+    showAdmin('updates');
+  });
+}
+
 function approveSub(id){
   const sub = submissions.find(x => x.id === id);
   if(!sub) return;
@@ -861,6 +940,13 @@ function deleteLore(id){
   loreEntries = loreEntries.filter(x => x.id !== id);
   saveData();
   showAdmin('lore');
+}
+
+function deleteUpdate(id){
+  if(!confirm('Permanently delete this update log?')) return;
+  updateLogs = updateLogs.filter(x => x.id !== id);
+  saveData();
+  showAdmin('updates');
 }
 
 function handleSearch(){
