@@ -1,750 +1,1035 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creepypasta Archive</title>
-  <style>
-    :root {
-      --bg-color: #0b0b0b;
-      --card-bg: #141414;
-      --border-color: #262626;
-      --accent-color: #ff3333;
-      --text-main: #e0e0e0;
-      --text-muted: #888888;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE ARCHIVE — Creepypastas & Internet Horror Lore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Montserrat:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-dark: #121212;
+  --panel-bg: #181818;
+  --panel-border: #282828;
+  --text-main: #e0e0e0;
+  --text-muted: #888888;
+  --accent-red: #d32f2f;
+  --accent-red-hover: #b71c1c;
+  --accent-orange: #f57c00;
+  --input-bg: #222222;
+  --input-border: #333333;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+a{color:var(--text-main);text-decoration:none}
+a:hover{color:var(--accent-red)}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+.topbar{height:4px;background:linear-gradient(90deg, var(--accent-red), var(--accent-orange))}
+.wrap{max-width:1150px;margin:auto;padding:0 20px}
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: var(--font-family);
-      line-height: 1.6;
-      padding-bottom: 60px;
-    }
+/* HEADER */
+header{
+  background: #0d0d0d;
+  border-bottom: 1px solid var(--panel-border);
+  padding: 20px 0 0;
+}
+.header-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.brand-group{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.brand-logo-svg{
+  width: 42px;
+  height: 42px;
+  fill: var(--accent-red);
+}
+.brand-title{
+  font-family: 'Creepster', cursive;
+  font-size: 38px;
+  color: var(--accent-red);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.brand-sub{
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-    /* Header & Navigation */
-    header {
-      background-color: #000000;
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+.search-box{
+  display: flex;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.search-box input{
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  width: 200px;
+}
+.search-box button{
+  background: var(--input-border);
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.search-box button:hover{background:var(--accent-red);color:#fff}
 
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-    }
+/* NAV */
+nav{
+  display: flex;
+  gap: 20px;
+  border-top: 1px solid var(--panel-border);
+  padding: 12px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+nav a{color: var(--text-muted); transition: color 0.2s;}
+nav a:hover{color: var(--text-main)}
+nav a.nav-highlight{color: var(--accent-red)}
 
-    .brand {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--accent-color);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
+/* MAIN LAYOUT */
+main{padding: 30px 0 60px}
+.crumb{font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px}
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-    }
+h1,h2,h3{font-family: 'Montserrat', sans-serif; font-weight: 700;}
+h1{font-size: 28px; margin: 0 0 10px; color: #fff;}
 
-    nav a {
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
-      cursor: pointer;
-    }
+/* BUTTONS */
+.btn{
+  display: inline-block;
+  background: #252525;
+  color: #fff;
+  border: 1px solid #3a3a3a;
+  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.btn:hover{background: #333; color: #fff; text-decoration: none;}
+.btn-red{background: var(--accent-red); border-color: var(--accent-red); color: #fff;}
+.btn-red:hover{background: var(--accent-red-hover); border-color: var(--accent-red-hover);}
+.btn-sm{padding: 6px 12px; font-size: 11px;}
 
-    nav a:hover, nav a.active {
-      color: var(--accent-color);
-    }
+/* CARDS & PANELS */
+.panel{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.story-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.story-card{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s;
+}
+.story-card:hover{border-color: #444}
+.tag{
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  letter-spacing: 1px;
+}
+.story-card h3{
+  margin: 8px 0;
+  font-size: 18px;
+}
+.story-card h3 a{color: #fff}
+.story-card h3 a:hover{color: var(--accent-red)}
+.story-meta{font-size: 11px; color: var(--text-muted); margin-bottom: 12px;}
+.story-desc{font-size: 13px; color: #b0b0b0; margin-bottom: 15px; line-height: 1.5;}
 
-    /* Main Container */
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
+.story-image-wrap{
+  width: 100%;
+  max-height: 280px;
+  background: #0a0a0a;
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.story-image-wrap img{
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
 
-    /* Sections */
-    .section {
-      display: none;
-    }
+/* READER VIEW */
+.reader-container{
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 30px;
+}
+.reader-body{
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 16px;
+  line-height: 2;
+  color: #d8d8d8;
+  margin-top: 25px;
+}
+.reader-body p{margin-bottom: 22px;}
+.reader-toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
+  padding: 12px 0;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
 
-    .section.active {
-      display: block;
-    }
+/* FORMS */
+label{
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 14px 0 6px;
+  color: var(--accent-orange);
+}
+input, select, textarea{
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+input:focus, textarea:focus, select:focus{border-color: var(--accent-orange);}
+textarea{min-height: 140px; resize: vertical;}
+input[type="file"]{padding: 8px; cursor: pointer;}
 
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 8px;
-      display: inline-block;
-    }
+/* ADMIN TABS */
+.admin-tabs{
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+}
+.tab-btn{
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tab-btn.active{background: var(--input-border); color: #fff;}
+.badge{
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
 
-    /* Card Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
+/* BLOOD OVERLAY */
+#blood-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+}
+#blood-overlay.active {
+  animation: bloodSplash 2s forwards;
+}
 
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+@keyframes bloodSplash {
+  0% { opacity: 0; transform: scale(0.9); }
+  15% { opacity: 1; transform: scale(1); }
+  80% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1.05); }
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: #404040;
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-
-    .card-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .card-excerpt {
-      font-size: 0.9rem;
-      color: #b0b0b0;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .btn {
-      background-color: var(--accent-color);
-      color: #ffffff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.2s ease;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .btn-secondary {
-      background-color: #333333;
-    }
-
-    .btn-danger {
-      background-color: #990000;
-    }
-
-    /* Forms */
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      color: #cccccc;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-main);
-      font-family: inherit;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--accent-color);
-    }
-
-    textarea.form-control {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    /* Modals */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-body {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 30px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .modal-close:hover {
-      color: var(--text-main);
-    }
-
-    /* Status Badges */
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 3px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .badge-pending {
-      background-color: #665200;
-      color: #ffdb4d;
-    }
-
-    .badge-approved {
-      background-color: #004d1a;
-      color: #66ff99;
-    }
-
-    /* Empty state */
-    .empty-state {
-      text-align: center;
-      padding: 40px;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-  </style>
+footer{
+  border-top: 1px solid var(--panel-border);
+  padding: 25px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.empty-state{
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand" onclick="switchTab('home')">Horror Archive</a>
-      <nav>
-        <ul>
-          <li><a id="nav-home" class="active" onclick="switchTab('home')">Stories</a></li>
-          <li><a id="nav-lore" onclick="switchTab('lore')">Lore</a></li>
-          <li><a id="nav-updates" onclick="switchTab('updates')">Updates</a></li>
-          <li><a id="nav-submit" onclick="switchTab('submit')">+ Submit Story</a></li>
-          <li><a id="nav-admin" onclick="switchTab('admin')">Editor Portal</a></li>
-        </ul>
-      </nav>
+<!-- ANIMATED BLOOD SPLATTER OVERLAY -->
+<svg id="blood-overlay" viewBox="0 0 800 600" preserveAspectRatio="none">
+  <path fill="#d32f2f" d="M -10,-10 L 250,-10 Q 190,100 150,120 Q 110,140 180,200 Q 100,150 80,240 Q 60,140 -10,130 Z"/>
+  <circle cx="210" cy="230" r="14" fill="#d32f2f"/>
+  <circle cx="250" cy="160" r="8" fill="#d32f2f"/>
+  <circle cx="130" cy="270" r="16" fill="#d32f2f"/>
+  <path fill="#9a0007" d="M 400,270 Q 440,200 460,240 Q 500,200 510,270 Q 570,280 510,320 Q 550,370 470,350 Q 450,430 420,360 Q 340,390 380,320 Q 310,280 370,260 Z"/>
+  <circle cx="530" cy="210" r="10" fill="#9a0007"/>
+  <circle cx="330" cy="370" r="12" fill="#9a0007"/>
+  <path fill="#d32f2f" d="M 810,610 L 600,610 Q 650,500 690,470 Q 750,510 730,390 Q 780,470 810,440 Z"/>
+  <circle cx="620" cy="450" r="15" fill="#d32f2f"/>
+</svg>
+
+<div class="topbar"></div>
+
+<header>
+  <div class="wrap">
+    <div class="header-flex">
+      <div class="brand-group" onclick="showHome(); return false;">
+        <svg class="brand-logo-svg" viewBox="0 0 512 512">
+          <path d="M256 32C167.6 32 96 103.6 96 192c0 43.1 16.5 82.3 43.6 111.8L128 384l64-32 32 64 32-64 32 64 32-64 64 32-11.6-80.2C399.5 274.3 416 235.1 416 192c0-88.4-71.6-160-160-160zm-64 192c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm-64 96c-35.3 0-64-28.7-64-64h128c0 35.3-28.7 64-64 64z"/>
+        </svg>
+        <div>
+          <div class="brand-title">THE ARCHIVE</div>
+          <div class="brand-sub">Creepypastas & Internet Horror Lore</div>
+        </div>
+      </div>
+      <div class="search-box">
+        <input id="search-input" placeholder="Search archive...">
+        <button onclick="handleSearch()">GO</button>
+      </div>
     </div>
-  </header>
 
-  <div class="container">
-
-    <!-- HOME / STORIES SECTION -->
-    <section id="sec-home" class="section active">
-      <h2 class="section-title">Published Stories</h2>
-      <div id="stories-container" class="grid">
-        <div class="empty-state">Loading stories...</div>
-      </div>
-    </section>
-
-    <!-- LORE SECTION -->
-    <section id="sec-lore" class="section">
-      <h2 class="section-title">Archive Lore</h2>
-      <div id="lore-container" class="grid">
-        <div class="empty-state">Loading lore entries...</div>
-      </div>
-    </section>
-
-    <!-- UPDATES SECTION -->
-    <section id="sec-updates" class="section">
-      <h2 class="section-title">Site Update Logs</h2>
-      <div id="updates-container" class="grid">
-        <div class="empty-state">Loading update logs...</div>
-      </div>
-    </section>
-
-    <!-- SUBMIT STORY SECTION -->
-    <section id="sec-submit" class="section">
-      <h2 class="section-title">Submit a Creepypasta</h2>
-      <form id="submission-form" style="max-width: 600px;">
-        <div class="form-group">
-          <label for="sub-title">Story Title</label>
-          <input type="text" id="sub-title" class="form-control" required placeholder="Enter story title">
-        </div>
-        <div class="form-group">
-          <label for="sub-author">Author Name / Pseudonym</label>
-          <input type="text" id="sub-author" class="form-control" required placeholder="Anonymous or your handle">
-        </div>
-        <div class="form-group">
-          <label for="sub-content">Story Content</label>
-          <textarea id="sub-content" class="form-control" required placeholder="Paste or write your story here..."></textarea>
-        </div>
-        <button type="submit" class="btn">Submit for Review</button>
-      </form>
-    </section>
-
-    <!-- ADMIN PORTAL SECTION -->
-    <section id="sec-admin" class="section">
-      <h2 class="section-title">Editor Portal</h2>
-      
-      <!-- Login Box -->
-      <div id="admin-login-box" style="max-width: 400px; margin-top: 20px;">
-        <p style="margin-bottom: 15px; color: var(--text-muted);">Please log in with admin credentials to manage content.</p>
-        <div class="form-group">
-          <label for="admin-email">Email Address</label>
-          <input type="email" id="admin-email" class="form-control" placeholder="lukesteynstudios@gmail.com">
-        </div>
-        <div class="form-group">
-          <label for="admin-pass">Password</label>
-          <input type="password" id="admin-pass" class="form-control">
-        </div>
-        <button id="admin-login-btn" class="btn">Log In</button>
-      </div>
-
-      <!-- Admin Panel Dashboard (Hidden until logged in) -->
-      <div id="admin-dashboard" style="display: none;">
-        <div style="display: flex; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-          <button class="btn btn-secondary" onclick="switchAdminTab('queue')">Pending Submissions</button>
-          <button class="btn btn-secondary" onclick="switchAdminTab('lore-mgr')">Manage Lore</button>
-          <button class="btn btn-secondary" onclick="switchAdminTab('logs-mgr')">Manage Update Logs</button>
-          <button class="btn btn-danger" style="margin-left: auto;" onclick="logoutAdmin()">Log Out</button>
-        </div>
-
-        <!-- Submissions Queue -->
-        <div id="admin-tab-queue">
-          <h3 style="margin-bottom: 15px;">Pending Submissions</h3>
-          <div id="admin-queue-container" class="grid">
-            <div class="empty-state">No pending submissions found.</div>
-          </div>
-        </div>
-
-        <!-- Lore Manager -->
-        <div id="admin-tab-lore-mgr" style="display: none;">
-          <h3 style="margin-bottom: 15px;">Add New Lore Entry</h3>
-          <form id="lore-form" style="max-width: 600px; margin-bottom: 30px;">
-            <div class="form-group">
-              <label for="lore-title">Lore Subject/Title</label>
-              <input type="text" id="lore-title" class="form-control" required placeholder="Entity / Phenomenon Name">
-            </div>
-            <div class="form-group">
-              <label for="lore-content">Description & Background</label>
-              <textarea id="lore-content" class="form-control" required placeholder="Detailed lore description..."></textarea>
-            </div>
-            <button type="submit" class="btn">Publish Lore</button>
-          </form>
-          <h3 style="margin-bottom: 15px;">Active Lore Entries</h3>
-          <div id="admin-lore-list" class="grid"></div>
-        </div>
-
-        <!-- Update Logs Manager -->
-        <div id="admin-tab-logs-mgr" style="display: none;">
-          <h3 style="margin-bottom: 15px;">Add Site Update Announcement</h3>
-          <form id="update-form" style="max-width: 600px; margin-bottom: 30px;">
-            <div class="form-group">
-              <label for="update-title">Update Title</label>
-              <input type="text" id="update-title" class="form-control" required placeholder="e.g. Version 1.2 Release">
-            </div>
-            <div class="form-group">
-              <label for="update-content">Update Details</label>
-              <textarea id="update-content" class="form-control" required placeholder="What's new in this release..."></textarea>
-            </div>
-            <button type="submit" class="btn">Post Update Log</button>
-          </form>
-          <h3 style="margin-bottom: 15px;">Active Update Logs</h3>
-          <div id="admin-updates-list" class="grid"></div>
-        </div>
-      </div>
-    </section>
-
+    <nav>
+      <a href="#" onclick="showHome(); return false;">Home</a>
+      <a href="#" onclick="showCategory('Psychological'); return false;">Psychological</a>
+      <a href="#" onclick="showCategory('Paranormal'); return false;">Paranormal</a>
+      <a href="#" onclick="showCategory('Entities & Monsters'); return false;">Entities & Monsters</a>
+      <a href="#" onclick="showCategory('Urban Legends'); return false;">Urban Legends</a>
+      <a href="#" onclick="showLore(); return false;">Character Lore</a>
+      <a href="#" onclick="showUpdates(); return false;">Update Logs</a>
+      <a href="#" class="nav-highlight" onclick="showSubmit(); return false;">+ Submit Story</a>
+      <a href="#" id="admin-nav-link" onclick="showLogin(); return false;">Editor Portal</a>
+    </nav>
   </div>
+</header>
 
-  <!-- STORY READER MODAL -->
-  <div id="story-modal" class="modal-overlay">
-    <div class="modal-body">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <h2 id="modal-title" style="margin-bottom: 10px; color: #ffffff;"></h2>
-      <div id="modal-meta" class="card-meta"></div>
-      <hr style="border-color: var(--border-color); margin-bottom: 20px;">
-      <div id="modal-content" style="white-space: pre-wrap; font-size: 1.05rem;"></div>
-    </div>
+<main class="wrap">
+  <div class="crumb" id="crumb-nav">HOME / THE ARCHIVE</div>
+  <div id="main-view"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    &copy; <span id="year"></span> THE ARCHIVE. All fictional stories and internet lore are hosted for entertainment.
   </div>
+</footer>
 
-  <!-- FIREBASE SDK & APP LOGIC -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
+<!-- FIREBASE SDKS & LOGIC -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
 
-    // Firebase Config Keys
-    const firebaseConfig = {
-      apiKey: "AIzaSyDvnMVbEzO8zol_uM0ogPIwDIMULcloaZg",
-      authDomain: "creepypaste-archive.firebaseapp.com",
-      databaseURL: "https://creepypaste-archive-default-rtdb.firebaseio.com",
-      projectId: "creepypaste-archive",
-      storageBucket: "creepypaste-archive.firebasestorage.app",
-      messagingSenderId: "887853219664",
-      appId: "1:887853219664:web:f6941727608fd9a5af7655"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvnMVbEzO8zol_uM0ogPIwDIMULcloaZg",
+    authDomain: "creepypaste-archive.firebaseapp.com",
+    databaseURL: "https://creepypaste-archive-default-rtdb.firebaseio.com",
+    projectId: "creepypaste-archive",
+    storageBucket: "creepypaste-archive.firebasestorage.app",
+    messagingSenderId: "887853219664",
+    appId: "1:887853219664:web:f6941727608fd9a5af7655"
+  };
 
-    // Initialize Firebase Services
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-    // References to Realtime Database Nodes
-    const storiesRef = ref(db, "stories");
-    const loreRef = ref(db, "lore");
-    const updatesRef = ref(db, "updates");
+  const storiesRef = ref(db, "stories");
+  const loreRef = ref(db, "lore");
+  const subsRef = ref(db, "submissions");
+  const updatesRef = ref(db, "updates");
 
-    // Local Data Caches
-    let globalStories = {};
-    let globalLore = {};
-    let globalUpdates = {};
+  let stories = [];
+  let loreEntries = [];
+  let submissions = [];
+  let siteUpdates = [];
 
-    // Navigation Switcher
-    window.switchTab = function(tabName) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  const ADMIN_EMAIL = "lukesteynstudios@gmail.com";
+  const ADMIN_PASS = "Luke@zuma007";
+
+  let currentUser = localStorage.getItem('archive_admin_user') || null;
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  
+  // Safe HTML parser for rich text (bold, italics, breaks) while escaping script injections
+  function safeHTML(html) {
+    if(!html) return '';
+    let cleaned = String(html)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    
+    cleaned = cleaned
+      .replace(/&lt;b&gt;/gi, '<b>')
+      .replace(/&lt;\/b&gt;/gi, '</b>')
+      .replace(/&lt;i&gt;/gi, '<i>')
+      .replace(/&lt;\/i&gt;/gi, '</i>')
+      .replace(/&lt;strong&gt;/gi, '<strong>')
+      .replace(/&lt;\/strong&gt;/gi, '</strong>')
+      .replace(/&lt;em&gt;/gi, '<em>')
+      .replace(/&lt;\/em&gt;/gi, '</em>')
+      .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
+      .replace(/&lt;p&gt;/gi, '<p>')
+      .replace(/&lt;\/p&gt;/gi, '</p>');
       
-      const targetSec = document.getElementById('sec-' + tabName);
-      const targetNav = document.getElementById('nav-' + tabName);
-      
-      if (targetSec) targetSec.classList.add('active');
-      if (targetNav) targetNav.classList.add('active');
-    };
+    return cleaned;
+  }
 
-    window.switchAdminTab = function(subTab) {
-      document.getElementById('admin-tab-queue').style.display = subTab === 'queue' ? 'block' : 'none';
-      document.getElementById('admin-tab-lore-mgr').style.display = subTab === 'lore-mgr' ? 'block' : 'none';
-      document.getElementById('admin-tab-logs-mgr').style.display = subTab === 'logs-mgr' ? 'block' : 'none';
-    };
+  const dateStr = d => d ? new Date(d).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : "Draft";
 
-    // Firebase Listeners (Real-Time Synchronization across all users/devices)
-    onValue(storiesRef, (snapshot) => {
-      globalStories = snapshot.val() || {};
-      renderPublicStories();
-      renderAdminQueue();
+  function fileToBase64(file){
+    return new Promise((resolve) => {
+      if(!file) return resolve('');
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
     });
+  }
 
-    onValue(loreRef, (snapshot) => {
-      globalLore = snapshot.val() || {};
-      renderLore();
-      renderAdminLore();
-    });
+  function triggerBlood(){
+    const overlay = $('blood-overlay');
+    if(!overlay) return;
+    overlay.classList.remove('active');
+    void overlay.offsetWidth;
+    overlay.classList.add('active');
+    setTimeout(() => overlay.classList.remove('active'), 2000);
+  }
 
-    onValue(updatesRef, (snapshot) => {
-      globalUpdates = snapshot.val() || {};
-      renderUpdates();
-      renderAdminUpdates();
-    });
+  function updateNavAdmin(){
+    const link = $('admin-nav-link');
+    if(!link) return;
+    if(currentUser) {
+      link.textContent = "Admin Control Panel";
+      link.onclick = (e) => { e.preventDefault(); showAdmin(); return false; };
+    } else {
+      link.textContent = "Editor Portal";
+      link.onclick = (e) => { e.preventDefault(); showLogin(); return false; };
+    }
+  }
 
-    // Render Published Stories
-    function renderPublicStories() {
-      const container = document.getElementById('stories-container');
-      container.innerHTML = '';
-      
-      const approvedKeys = Object.keys(globalStories).filter(k => globalStories[k].status === 'approved');
-      
-      if (approvedKeys.length === 0) {
-        container.innerHTML = '<div class="empty-state">No published stories available yet.</div>';
-        return;
+  // Real-time synchronization listeners
+  onValue(storiesRef, (snapshot) => {
+    const data = snapshot.val() || {};
+    stories = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+    if(window.location.hash.includes('admin') && currentUser) {
+      if($('admin-tab-content')) showAdmin('stories');
+    } else {
+      if(document.getElementById('main-view') && !document.getElementById('login-form') && !document.getElementById('public-submit-form')) {
+        // Keep view if reading or browsing
       }
-
-      approvedKeys.forEach(key => {
-        const item = globalStories[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <div class="card-meta">By ${escapeHtml(item.author)} • ${item.date}</div>
-            <p class="card-excerpt">${escapeHtml(item.content.substring(0, 140))}...</p>
-          </div>
-          <button class="btn" style="margin-top: 15px;" onclick="openStoryModal('${key}')">Read Story</button>
-        `;
-        container.appendChild(card);
-      });
     }
+  });
 
-    // Render Lore Entries
-    function renderLore() {
-      const container = document.getElementById('lore-container');
-      container.innerHTML = '';
-      
-      const keys = Object.keys(globalLore);
-      if (keys.length === 0) {
-        container.innerHTML = '<div class="empty-state">No lore entries found.</div>';
-        return;
-      }
+  onValue(loreRef, (snapshot) => {
+    const data = snapshot.val() || {};
+    loreEntries = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+  });
 
-      keys.forEach(key => {
-        const item = globalLore[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <div class="card-meta">Archived on ${item.date}</div>
-            <p class="card-excerpt">${escapeHtml(item.content)}</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+  onValue(subsRef, (snapshot) => {
+    const data = snapshot.val() || {};
+    submissions = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+  });
+
+  onValue(updatesRef, (snapshot) => {
+    const data = snapshot.val() || {};
+    siteUpdates = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+  });
+
+  function renderCard(s){
+    let img = s.image ? `<div class="story-image-wrap"><img src="${s.image}" alt="Story illustration"></div>` : '';
+    let plainDesc = (s.summary || s.body).replace(/<[^>]*>?/gm, '');
+    return `
+      <div class="story-card">
+        <div>
+          <span class="tag">${esc(s.category||'Creepypasta')}</span>
+          <h3><a href="#" onclick="openStory('${s.id}'); return false;">${esc(s.title)}</a></h3>
+          <div class="story-meta">By ${esc(s.author||'Anonymous')} &bull; ${dateStr(s.published_at)}</div>
+          ${img}
+          <div class="story-desc">${esc(plainDesc.substring(0, 120))}...</div>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-red" onclick="openStory('${s.id}'); return false;">READ STORY &rarr;</button>
+        </div>
+      </div>
+    `;
+  }
+
+  window.showHome = function(){
+    updateNavAdmin();
+    $('crumb-nav').textContent = 'HOME / THE ARCHIVE';
+    const pub = stories.filter(s => s.status === 'published');
+    
+    let html = `
+      <h1>Archive Collection</h1>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom: 25px;">
+        Explore archived accounts, creepypastas, and unexplained entries.
+      </p>
+    `;
+
+    if(!pub.length){
+      html += `<div class="panel empty-state"><h3>No Stories Published Yet</h3><p>The archive is currently empty. Use the Editor Portal or submit a story to begin.</p></div>`;
+    } else {
+      html += `<div class="story-grid">${pub.map(renderCard).join('')}</div>`;
     }
+    
+    $('main-view').innerHTML = html;
+    window.scrollTo(0, 0);
+  };
 
-    // Render Update Logs
-    function renderUpdates() {
-      const container = document.getElementById('updates-container');
-      container.innerHTML = '';
-      
-      const keys = Object.keys(globalUpdates);
-      if (keys.length === 0) {
-        container.innerHTML = '<div class="empty-state">No update logs posted yet.</div>';
-        return;
-      }
-
-      keys.reverse().forEach(key => {
-        const item = globalUpdates[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <div class="card-meta">Posted on ${item.date}</div>
-            <p style="white-space: pre-wrap;">${escapeHtml(item.content)}</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+  window.showCategory = function(cat){
+    $('crumb-nav').textContent = `CATEGORIES / ${cat.toUpperCase()}`;
+    const filtered = stories.filter(s => s.status === 'published' && s.category === cat);
+    
+    let html = `<h1>${esc(cat)} Stories</h1>`;
+    if(!filtered.length){
+      html += `<div class="panel empty-state"><h3>No entries in this category</h3></div>`;
+    } else {
+      html += `<div class="story-grid">${filtered.map(renderCard).join('')}</div>`;
     }
+    $('main-view').innerHTML = html;
+    window.scrollTo(0, 0);
+  };
 
-    // Admin Render Helpers
-    function renderAdminQueue() {
-      const container = document.getElementById('admin-queue-container');
-      container.innerHTML = '';
-      
-      const pendingKeys = Object.keys(globalStories).filter(k => globalStories[k].status === 'pending');
-      
-      if (pendingKeys.length === 0) {
-        container.innerHTML = '<div class="empty-state">No pending submissions in queue.</div>';
-        return;
-      }
+  window.openStory = function(id){
+    const s = stories.find(x => x.id === id);
+    if(!s) return;
 
-      pendingKeys.forEach(key => {
-        const item = globalStories[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
+    $('crumb-nav').textContent = `READ / ${s.title.toUpperCase()}`;
+    let img = s.image ? `<div class="story-image-wrap" style="max-height:400px; margin:20px 0;"><img src="${s.image}" style="max-height:400px;" alt="Illustration"></div>` : '';
+    
+    let formattedBody = safeHTML(s.body);
+    const bodyHtml = formattedBody.includes('<p>') ? formattedBody : formattedBody.split(/\n+/).map(p => `<p>${p}</p>`).join('');
+
+    $('main-view').innerHTML = `
+      <div class="reader-container">
+        <span class="tag">${esc(s.category)}</span>
+        <h1 style="font-size:32px; margin-top:10px;">${esc(s.title)}</h1>
+        <div style="color:var(--text-muted); font-size:12px;">By ${esc(s.author||'Anonymous')} &bull; Published ${dateStr(s.published_at)}</div>
+        ${img}
+        <div class="reader-toolbar">
+          <span>Reading Time: ~${Math.max(1, Math.ceil(s.body.length/900))} min</span>
           <div>
-            <span class="badge badge-pending" style="margin-bottom: 8px;">Pending</span>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <div class="card-meta">Submitted by ${escapeHtml(item.author)} on ${item.date}</div>
-            <p class="card-excerpt">${escapeHtml(item.content.substring(0, 150))}...</p>
+            <button class="btn btn-sm" onclick="adjustTextSize(-1)">A-</button>
+            <button class="btn btn-sm" onclick="adjustTextSize(1)">A+</button>
           </div>
-          <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button class="btn" style="flex: 1;" onclick="approveStory('${key}')">Approve & Publish</button>
-            <button class="btn btn-danger" onclick="deleteStory('${key}')">Reject</button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
+        </div>
+        <div class="reader-body" id="reader-text">${bodyHtml}</div>
+        <div style="margin-top: 30px;">
+          <button class="btn" onclick="showHome(); return false;">&larr; Return to Archive</button>
+        </div>
+      </div>
+    `;
+    window.scrollTo(0, 0);
+  };
 
-    function renderAdminLore() {
-      const container = document.getElementById('admin-lore-list');
-      container.innerHTML = '';
-      Object.keys(globalLore).forEach(key => {
-        const item = globalLore[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
+  window.adjustTextSize = function(delta){
+    const el = $('reader-text');
+    if(!el) return;
+    const current = parseFloat(window.getComputedStyle(el).fontSize);
+    el.style.fontSize = Math.max(12, Math.min(26, current + delta)) + 'px';
+  };
+
+  window.showLore = function(){
+    $('crumb-nav').textContent = 'LORE / CHARACTER PROFILES';
+    const pub = loreEntries.filter(l => l.status === 'published' || !l.status);
+    
+    let html = `<h1>Character & Entity Lore</h1>`;
+    if(!pub.length){
+      html += `<div class="panel empty-state"><h3>No lore entries available.</h3></div>`;
+    } else {
+      html += `<div class="story-grid">${pub.map(l => `
+        <div class="story-card">
           <div>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <p class="card-excerpt">${escapeHtml(item.content.substring(0, 80))}...</p>
+            <span class="tag">${esc(l.kind)}</span>
+            <h3>${esc(l.title)}</h3>
+            ${l.image ? `<div class="story-image-wrap"><img src="${l.image}"></div>` : ''}
+            <div class="story-desc">${esc(l.body)}</div>
           </div>
-          <button class="btn btn-danger" style="margin-top: 10px;" onclick="deleteLore('${key}')">Delete Entry</button>
-        `;
-        container.appendChild(card);
-      });
+        </div>
+      `).join('')}</div>`;
     }
+    $('main-view').innerHTML = html;
+    window.scrollTo(0, 0);
+  };
 
-    function renderAdminUpdates() {
-      const container = document.getElementById('admin-updates-list');
-      container.innerHTML = '';
-      Object.keys(globalUpdates).forEach(key => {
-        const item = globalUpdates[key];
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div>
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <p class="card-excerpt">${escapeHtml(item.content.substring(0, 80))}...</p>
+  window.showUpdates = function(){
+    $('crumb-nav').textContent = 'UPDATES / SITE LOGS';
+    let html = `<h1>Site Update Logs</h1>`;
+    if(!siteUpdates.length){
+      html += `<div class="panel empty-state"><h3>No update logs posted yet.</h3></div>`;
+    } else {
+      html += siteUpdates.map(u => `
+        <div class="panel" style="margin-bottom:15px;">
+          <span class="tag">${dateStr(u.date)}</span>
+          <h3 style="margin-top:5px; color:#fff;">${esc(u.title)}</h3>
+          <p style="font-size:13px; color:#ccc; margin-top:10px; white-space:pre-wrap;">${esc(u.content)}</p>
+        </div>
+      `).join('');
+    }
+    $('main-view').innerHTML = html;
+    window.scrollTo(0, 0);
+  };
+
+  window.showSubmit = function(){
+    $('crumb-nav').textContent = 'CONTRIBUTE / SUBMIT STORY';
+    $('main-view').innerHTML = `
+      <div class="panel" style="max-width:700px; margin:auto;">
+        <h1 style="color:var(--accent-red);">Submit Your Creepypasta</h1>
+        <p style="color:var(--text-muted); font-size:13px;">Submitted stories are queued for administrator review before appearing publicly. You can paste formatted text or use HTML tags like &lt;b&gt;, &lt;i&gt;, or &lt;br&gt; for rich text formatting.</p>
+        <form id="public-submit-form">
+          <label>Author Name / Alias</label>
+          <input name="author" required placeholder="e.g. Anonymoose">
+          
+          <label>Email Address</label>
+          <input name="email" type="email" required placeholder="you@example.com">
+          
+          <label>Story Title</label>
+          <input name="title" required placeholder="Title of your story">
+          
+          <label>Category</label>
+          <select name="category">
+            <option>Psychological</option>
+            <option>Paranormal</option>
+            <option>Entities & Monsters</option>
+            <option>Urban Legends</option>
+          </select>
+          
+          <label>Illustration / Photo (Optional)</label>
+          <input name="imageFile" type="file" accept="image/*">
+          
+          <label>Short Summary</label>
+          <textarea name="summary" style="min-height:70px;" placeholder="Brief teaser..."></textarea>
+          
+          <label>Full Story Text (Supports Bold & Italics)</label>
+          <textarea name="body" required placeholder="Type or paste your story here..."></textarea>
+          
+          <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-red">SEND FOR REVIEW</button>
           </div>
-          <button class="btn btn-danger" style="margin-top: 10px;" onclick="deleteUpdate('${key}')">Delete Log</button>
-        `;
-        container.appendChild(card);
-      });
-    }
+          <div id="submit-status" style="margin-top:15px; font-weight:700;"></div>
+        </form>
+      </div>
+    `;
 
-    // Story Submissions Form Handler
-    document.getElementById('submission-form').addEventListener('submit', (e) => {
+    $('public-submit-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const title = document.getElementById('sub-title').value.trim();
-      const author = document.getElementById('sub-author').value.trim();
-      const content = document.getElementById('sub-content').value.trim();
+      triggerBlood();
+      
+      const f = new FormData(e.target);
+      const imgBase64 = await fileToBase64(f.get('imageFile'));
 
-      if (!title || !author || !content) return;
+      const sub = {
+        author: f.get('author'),
+        email: f.get('email'),
+        title: f.get('title'),
+        category: f.get('category'),
+        summary: f.get('summary'),
+        body: f.get('body'),
+        image: imgBase64,
+        created_at: new Date().toISOString()
+      };
 
-      push(storiesRef, {
-        title: title,
-        author: author,
-        content: content,
-        status: 'pending',
-        date: new Date().toLocaleDateString()
-      }).then(() => {
-        alert('Your story has been submitted for review!');
-        document.getElementById('submission-form').reset();
-        switchTab('home');
+      push(subsRef, sub).then(() => {
+        $('submit-status').style.color = '#4caf50';
+        $('submit-status').textContent = 'Your story has been submitted for review.';
+        e.target.reset();
       });
     });
+    window.scrollTo(0, 0);
+  };
 
-    // Admin Forms Handlers
-    document.getElementById('lore-form').addEventListener('submit', (e) => {
+  window.showLogin = function(){
+    $('crumb-nav').textContent = 'PORTAL / EDITOR ACCESS';
+    $('main-view').innerHTML = `
+      <div class="panel" style="max-width:400px; margin:auto;">
+        <h2 style="color:var(--accent-orange); margin-top:0;">Administrator Portal</h2>
+        <form id="login-form">
+          <label>Admin ID / Email</label>
+          <input name="email" type="email" required placeholder="Enter admin email">
+          <label>Password</label>
+          <input name="password" type="password" required placeholder="Enter password">
+          <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-red" style="width:100%;">SIGN IN</button>
+          </div>
+          <div id="login-error" style="color:var(--accent-red); margin-top:12px; font-size:12px;"></div>
+        </form>
+      </div>
+    `;
+
+    $('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const title = document.getElementById('lore-title').value.trim();
-      const content = document.getElementById('lore-content').value.trim();
-
-      if (!title || !content) return;
-
-      push(loreRef, {
-        title: title,
-        content: content,
-        date: new Date().toLocaleDateString()
-      }).then(() => {
-        document.getElementById('lore-form').reset();
-      });
-    });
-
-    document.getElementById('update-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('update-title').value.trim();
-      const content = document.getElementById('update-content').value.trim();
-
-      if (!title || !content) return;
-
-      push(updatesRef, {
-        title: title,
-        content: content,
-        date: new Date().toLocaleDateString()
-      }).then(() => {
-        document.getElementById('update-form').reset();
-      });
-    });
-
-    // Admin Global Actions
-    window.approveStory = function(key) {
-      update(ref(db, `stories/${key}`), { status: 'approved' });
-    };
-
-    window.deleteStory = function(key) {
-      if (confirm('Delete this story?')) remove(ref(db, `stories/${key}`));
-    };
-
-    window.deleteLore = function(key) {
-      if (confirm('Delete this lore entry?')) remove(ref(db, `lore/${key}`));
-    };
-
-    window.deleteUpdate = function(key) {
-      if (confirm('Delete this update log?')) remove(ref(db, `updates/${key}`));
-    };
-
-    // Admin Auth Mock
-    document.getElementById('admin-login-btn').addEventListener('click', () => {
-      const email = document.getElementById('admin-email').value;
-      const pass = document.getElementById('admin-pass').value;
-
-      if (email === 'lukesteynstudios@gmail.com' && pass === 'Luke@zuma007') {
-        document.getElementById('admin-login-box').style.display = 'none';
-        document.getElementById('admin-dashboard').style.display = 'block';
+      const f = new FormData(e.target);
+      if(f.get('email').trim().toLowerCase() === ADMIN_EMAIL && f.get('password') === ADMIN_PASS){
+        currentUser = ADMIN_EMAIL;
+        localStorage.setItem('archive_admin_user', currentUser);
+        updateNavAdmin();
+        showAdmin();
       } else {
-        alert('Invalid Admin Credentials!');
+        $('login-error').textContent = 'Invalid administrator credentials.';
       }
     });
+    window.scrollTo(0, 0);
+  };
 
-    window.logoutAdmin = function() {
-      document.getElementById('admin-dashboard').style.display = 'none';
-      document.getElementById('admin-login-box').style.display = 'block';
-      document.getElementById('admin-pass').value = '';
-    };
+  window.showAdmin = function(activeTab = 'stories'){
+    if(currentUser !== ADMIN_EMAIL) { showLogin(); return; }
 
-    // Story Reader Modal Helpers
-    window.openStoryModal = function(key) {
-      const story = globalStories[key];
-      if (!story) return;
-      document.getElementById('modal-title').innerText = story.title;
-      document.getElementById('modal-meta').innerText = `By ${story.author} • Published ${story.date}`;
-      document.getElementById('modal-content').innerText = story.content;
-      document.getElementById('story-modal').classList.add('active');
-    };
+    $('crumb-nav').textContent = 'PORTAL / CONTROL PANEL';
+    $('main-view').innerHTML = `
+      <div class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <span style="color:var(--accent-orange); font-size:11px; font-weight:700; text-transform:uppercase;">ADMINISTRATOR PORTAL</span>
+            <h1 style="font-family:'Creepster', cursive; font-size:32px; color:#fff; margin:0;">ARCHIVE EDITOR CONTROL PANEL</h1>
+          </div>
+          <button class="btn btn-sm" onclick="signOut(); return false;">Sign Out</button>
+        </div>
 
-    window.closeModal = function() {
-      document.getElementById('story-modal').classList.remove('active');
-    };
+        <div class="admin-tabs">
+          <button class="tab-btn ${activeTab==='stories'?'active':''}" onclick="showAdmin('stories'); return false;">Stories (${stories.length})</button>
+          <button class="tab-btn ${activeTab==='lore'?'active':''}" onclick="showAdmin('lore'); return false;">Lore (${loreEntries.length})</button>
+          <button class="tab-btn ${activeTab==='subs'?'active':''}" onclick="showAdmin('subs'); return false;">Submissions <span class="badge">${submissions.length}</span></button>
+          <button class="tab-btn ${activeTab==='updates'?'active':''}" onclick="showAdmin('updates'); return false;">Update Logs (${siteUpdates.length})</button>
+        </div>
 
-    function escapeHtml(text) {
-      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        <div style="margin-bottom:20px;">
+          ${activeTab==='stories' ? `<button class="btn btn-red" onclick="editStoryForm(); return false;">+ ADD NEW CREEPYPASTA</button>` : ''}
+          ${activeTab==='lore' ? `<button class="btn btn-red" onclick="editLoreForm(); return false;">+ ADD CHARACTER LORE</button>` : ''}
+          ${activeTab==='updates' ? `<button class="btn btn-red" onclick="editUpdateForm(); return false;">+ POST UPDATE LOG</button>` : ''}
+        </div>
+
+        <div id="admin-tab-content"></div>
+      </div>
+    `;
+
+    const container = $('admin-tab-content');
+
+    if(activeTab === 'stories'){
+      container.innerHTML = stories.length ? stories.map(s => `
+        <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px; flex-wrap:wrap; gap:10px;">
+          <div>
+            <strong>${esc(s.title)}</strong> <span class="tag">${esc(s.status)}</span>
+            <div style="font-size:11px; color:var(--text-muted);">${esc(s.category)} &bull; By ${esc(s.author)}</div>
+          </div>
+          <div>
+            <button class="btn btn-sm" onclick="editStoryForm('${s.id}'); return false;">Edit</button>
+            <button class="btn btn-sm btn-red" onclick="deleteStory('${s.id}'); return false;">Delete</button>
+          </div>
+        </div>
+      `).join('') : `<p class="empty-state">No stories created yet.</p>`;
+    } else if(activeTab === 'lore'){
+      container.innerHTML = loreEntries.length ? loreEntries.map(l => `
+        <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px;">
+          <div>
+            <strong>${esc(l.title)}</strong> <span class="tag">${esc(l.kind)}</span>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-red" onclick="deleteLore('${l.id}'); return false;">Delete</button>
+          </div>
+        </div>
+      `).join('') : `<p class="empty-state">No lore entries created yet.</p>`;
+    } else if(activeTab === 'subs'){
+      container.innerHTML = submissions.length ? submissions.map(sub => `
+        <div class="panel" style="background:#111; margin-bottom:15px;">
+          <span class="tag">${esc(sub.category)}</span>
+          <h3>${esc(sub.title)}</h3>
+          <p style="font-size:12px; color:var(--text-muted);">From: ${esc(sub.author)} (${esc(sub.email)})</p>
+          ${sub.image ? `<div class="story-image-wrap"><img src="${sub.image}"></div>` : ''}
+          <div style="font-size:13px; color:#ccc; margin:10px 0;">${safeHTML(sub.body)}</div>
+          <button class="btn btn-sm btn-red" onclick="approveSub('${sub.id}'); return false;">APPROVE & PUBLISH</button>
+          <button class="btn btn-sm" onclick="deleteSub('${sub.id}'); return false;">REJECT</button>
+        </div>
+      `).join('') : `<p class="empty-state">No pending submissions.</p>`;
+    } else if(activeTab === 'updates'){
+      container.innerHTML = siteUpdates.length ? siteUpdates.map(u => `
+        <div class="panel" style="display:flex; justify-content:space-between; align-items:center; background:#111; margin-bottom:10px; padding:15px;">
+          <div>
+            <strong>${esc(u.title)}</strong> <span class="tag">${dateStr(u.date)}</span>
+            <div style="font-size:11px; color:var(--text-muted);">${esc(u.content.substring(0, 60))}...</div>
+          </div>
+          <div>
+            <button class="btn btn-sm btn-red" onclick="deleteUpdate('${u.id}'); return false;">Delete</button>
+          </div>
+        </div>
+      `).join('') : `<p class="empty-state">No update logs posted yet.</p>`;
     }
-  </script>
+    window.scrollTo(0, 0);
+  };
+
+  window.editStoryForm = function(id = ''){
+    const s = stories.find(x => x.id === id) || {};
+    $('admin-tab-content').innerHTML = `
+      <h3>${id ? 'Edit Story' : 'New Creepypasta'}</h3>
+      <form id="story-editor-form">
+        <label>Title</label>
+        <input name="title" required value="${esc(s.title||'')}">
+        
+        <label>Author</label>
+        <input name="author" value="${esc(s.author||'Anonymous')}">
+        
+        <label>Category</label>
+        <select name="category">
+          <option ${s.category==='Psychological'?'selected':''}>Psychological</option>
+          <option ${s.category==='Paranormal'?'selected':''}>Paranormal</option>
+          <option ${s.category==='Entities & Monsters'?'selected':''}>Entities & Monsters</option>
+          <option ${s.category==='Urban Legends'?'selected':''}>Urban Legends</option>
+        </select>
+        
+        <label>Cover Photo (Upload)</label>
+        ${s.image ? `<div class="story-image-wrap"><img src="${s.image}"></div>` : ''}
+        <input name="imageFile" type="file" accept="image/*">
+        
+        <label>Short Summary</label>
+        <textarea name="summary" style="min-height:60px;">${esc(s.summary||'')}</textarea>
+        
+        <label>Full Story Text (Supports Bold & Italics)</label>
+        <textarea name="body" required style="min-height:200px;">${esc(s.body||'')}</textarea>
+        
+        <label>Status</label>
+        <select name="status">
+          <option value="published" ${s.status==='published'?'selected':''}>Published</option>
+          <option value="draft" ${s.status==='draft'?'selected':''}>Draft</option>
+        </select>
+        
+        <div style="margin-top:20px;">
+          <button type="submit" class="btn btn-red">SAVE STORY</button>
+          <button type="button" class="btn" onclick="showAdmin('stories'); return false;">CANCEL</button>
+        </div>
+      </form>
+    `;
+
+    $('story-editor-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const newImg = await fileToBase64(f.get('imageFile'));
+      
+      const storyId = id || ('story_' + Date.now());
+      const row = {
+        title: f.get('title'),
+        author: f.get('author'),
+        category: f.get('category'),
+        summary: f.get('summary'),
+        body: f.get('body'),
+        image: newImg || s.image || '',
+        status: f.get('status'),
+        published_at: f.get('status')==='published' ? (s.published_at || new Date().toISOString()) : null
+      };
+
+      set(ref(db, `stories/${storyId}`), row).then(() => {
+        showAdmin('stories');
+      });
+    });
+  };
+
+  window.editLoreForm = function(){
+    $('admin-tab-content').innerHTML = `
+      <h3>New Character Lore</h3>
+      <form id="lore-editor-form">
+        <label>Character / Entity Name</label>
+        <input name="title" required>
+        <label>Type</label>
+        <input name="kind" placeholder="e.g. Entity, Monster, Urban Legend">
+        <label>Image (Upload)</label>
+        <input name="imageFile" type="file" accept="image/*">
+        <label>Description / Lore</label>
+        <textarea name="body" required style="min-height:150px;"></textarea>
+        <div style="margin-top:20px;">
+          <button type="submit" class="btn btn-red">SAVE LORE</button>
+          <button type="button" class="btn" onclick="showAdmin('lore'); return false;">CANCEL</button>
+        </div>
+      </form>
+    `;
+
+    $('lore-editor-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const img = await fileToBase64(f.get('imageFile'));
+
+      const loreId = 'lore_' + Date.now();
+      const row = {
+        title: f.get('title'),
+        kind: f.get('kind') || 'Entity',
+        image: img,
+        body: f.get('body'),
+        status: 'published'
+      };
+
+      set(ref(db, `lore/${loreId}`), row).then(() => {
+        showAdmin('lore');
+      });
+    });
+  };
+
+  window.editUpdateForm = function(){
+    $('admin-tab-content').innerHTML = `
+      <h3>New Site Update Log</h3>
+      <form id="update-editor-form">
+        <label>Update Title</label>
+        <input name="title" required placeholder="e.g. Version 1.1 Update">
+        <label>Update Details</label>
+        <textarea name="content" required style="min-height:150px;" placeholder="What changed..."></textarea>
+        <div style="margin-top:20px;">
+          <button type="submit" class="btn btn-red">POST UPDATE</button>
+          <button type="button" class="btn" onclick="showAdmin('updates'); return false;">CANCEL</button>
+        </div>
+      </form>
+    `;
+
+    $('update-editor-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const updateId = 'update_' + Date.now();
+      const row = {
+        title: f.get('title'),
+        content: f.get('content'),
+        date: new Date().toISOString()
+      };
+
+      set(ref(db, `updates/${updateId}`), row).then(() => {
+        showAdmin('updates');
+      });
+    });
+  };
+
+  window.approveSub = function(id){
+    const sub = submissions.find(x => x.id === id);
+    if(!sub) return;
+
+    const storyId = 'story_' + Date.now();
+    const newStory = {
+      title: sub.title,
+      author: sub.author,
+      category: sub.category,
+      summary: sub.summary,
+      body: sub.body,
+      image: sub.image || '',
+      status: 'published',
+      published_at: new Date().toISOString()
+    };
+
+    set(ref(db, `stories/${storyId}`), newStory).then(() => {
+      remove(ref(db, `submissions/${id}`)).then(() => {
+        showAdmin('subs');
+      });
+    });
+  };
+
+  window.deleteSub = function(id){
+    remove(ref(db, `submissions/${id}`)).then(() => {
+      showAdmin('subs');
+    });
+  };
+
+  window.deleteStory = function(id){
+    if(!confirm('Permanently delete this story?')) return;
+    remove(ref(db, `stories/${id}`)).then(() => {
+      showAdmin('stories');
+    });
+  };
+
+  window.deleteLore = function(id){
+    if(!confirm('Permanently delete this lore entry?')) return;
+    remove(ref(db, `lore/${id}`)).then(() => {
+      showAdmin('lore');
+    });
+  };
+
+  window.deleteUpdate = function(id){
+    if(!confirm('Permanently delete this update log?')) return;
+    remove(ref(db, `updates/${id}`)).then(() => {
+      showAdmin('updates');
+    });
+  };
+
+  window.handleSearch = function(){
+    const q = $('search-input').value.trim().toLowerCase();
+    if(!q) return;
+    
+    $('crumb-nav').textContent = `SEARCH / "${q.toUpperCase()}"`;
+    const results = stories.filter(s => s.status==='published' && (s.title.toLowerCase().includes(q) || s.body.toLowerCase().includes(q)));
+
+    let html = `<h1>Search Results for "${esc(q)}"</h1>`;
+    if(!results.length){
+      html += `<div class="panel empty-state"><h3>No matching stories found.</h3></div>`;
+    } else {
+      html += `<div class="story-grid">${results.map(renderCard).join('')}</div>`;
+    }
+    $('main-view').innerHTML = html;
+    window.scrollTo(0, 0);
+  };
+
+  window.signOut = function(){
+    currentUser = null;
+    localStorage.removeItem('archive_admin_user');
+    updateNavAdmin();
+    showHome();
+  };
+
+  $('year').textContent = new Date().getFullYear();
+  showHome();
+</script>
 </body>
 </html>
