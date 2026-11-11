@@ -23,7 +23,7 @@
 ## Live Demo
 
 Check out the live deployment hosted on GitHub Pages:  
- **[The Archives Live Site](https://your-github-username.github.io/your-repo-name)** *(Replace with your actual link)*
+ **[The Archives Live Site](https://iamlukeinquiry-cpu.github.io/the-archives/)** *(CURRENTLY IN BETA)*
 
 ---
 
