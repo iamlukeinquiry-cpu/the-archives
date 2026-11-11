@@ -1,16 +1,16 @@
-# 📂 The Archives
+# The Archives
 
 > *"An alternative to creepypastas, built entirely around our original characters and unexplainable accounts. Submit your own stories, explore dark lore, and enjoy the nightmare."*
 
 ---
 
-## 💀 About The Project
+## About The Project
 
 **The Archives** is a fully responsive, self-hosted web application built for horror creators, writers, and fans. It serves as a centralized hub for original horror fiction, character lore profiles, and interactive reader submissions—synchronized globally in real time via a cloud database.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 * **Global Real-Time Database:** Powered by Firebase, ensuring stories, updates, and submissions sync instantly across all devices, browsers, and private/incognito tabs worldwide.
 * **Admin Control Panel:** Secure moderation portal enabling instant story review, approval queues, lore publishing, and site update logging.
@@ -20,14 +20,14 @@
 
 ---
 
-## 🚀 Live Demo
+## Live Demo
 
 Check out the live deployment hosted on GitHub Pages:  
-👉 **[The Archives Live Site](https://your-github-username.github.io/your-repo-name)** *(Replace with your actual link)*
+ **[The Archives Live Site](https://your-github-username.github.io/your-repo-name)** *(Replace with your actual link)*
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Frontend:** HTML5, CSS3, JavaScript (Vanilla ES6 SPA Architecture)
 * **Database & Sync:** Firebase Realtime Database
@@ -35,7 +35,7 @@ Check out the live deployment hosted on GitHub Pages:
 
 ---
 
-## 📖 How It Works
+## How It Works
 
 1. **Submit:** Visitors head over to the submission portal, enter their original character stories or creepypastas (with optional rich text formatting), and send them in.
 2. **Review:** Administrators sign into the secure **Editor Portal** to inspect pending submissions in the queue.
